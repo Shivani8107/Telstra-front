@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,12 +8,13 @@ import {
   selectedProduct,
   removeSelectedProduct,
 } from "../redux/actions/productsActions";
+import { addToCart } from "../redux/reducers/cartSlice";
 import Review from './Review'
 import ReactStars from "react-rating-stars-component";
 import { MDBIcon } from 'mdbreact';
 const ProductDetails = () => {
   const { productId } = useParams();
-  
+  const history = useHistory();
   const selected_products = useSelector((state) => state.product);
   const firstproduct = selected_products[0];
   const { category, description,brand, image, name, p_id, price} = firstproduct || { };
@@ -23,6 +24,11 @@ const ProductDetails = () => {
   const [rating, setRating] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   // const [message, setMessage] = useState('')
+  
+  const handleAddToCart = (firstproduct) => {
+    dispatch(addToCart(firstproduct));
+    //history.push("/cart");
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -90,7 +96,27 @@ const ProductDetails = () => {
                 </h2>
                 <div style={{display:'flex', justifyContent:'center'}}> 
                 <button style={{ width:'300px',height:'50px', border: 'None', marginRight:'20px', backgroundColor: '#1CBD97', borderRadius:'10px'}}><a href='/'  style={{color:'white', textDecoration:'None', fontFamily: "'Sofia Sans'", fontSize: '25px', fontWeight: '400px'}}><MDBIcon style={{fontSize:'20px',color:'#000000'}} className='me-4' icon='fire' />Buy Now</a></button>
-                <button style={{ width:'300px',height:'50px', border: 'None', marginLeft:'20px', backgroundColor: '#DDCB26', borderRadius:'10px'}}><a href='/'  style={{color:'white', textDecoration:'None', fontFamily: "'Sofia Sans'", fontSize: '25px', fontWeight: '400px'}}><MDBIcon style={{fontSize:'20px',color:'#000000'}} className='me-4' icon='shopping-cart' />Add To Cart</a></button>
+                <button style={{
+    width: '300px',
+    height: '50px',
+    border: 'none',
+    marginLeft: '20px',
+    backgroundColor: '#DDCB26',
+    borderRadius: '10px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: 'white',
+    fontFamily: "'Sofia Sans'",
+    fontSize: '25px',
+    fontWeight: '400px',
+    cursor: 'pointer'
+  }} onClick={() => handleAddToCart(firstproduct)}
+>
+  <MDBIcon style={{ fontSize: '20px', color: '#000000', marginRight: '10px' }} className="me-4" icon="shopping-cart" />
+  Add To Cart
+</button>
+
 
                 </div>
               </div>
