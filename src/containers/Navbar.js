@@ -1,6 +1,6 @@
 import React from 'react'
 import { MDBIcon } from 'mdbreact';
-import logo from '../Assets/favicon-32x32.png'
+import logo from '../Assets/telstra-black.png'
 
 const Navbar = () => {
   return (
@@ -9,7 +9,7 @@ const Navbar = () => {
   <div className="container-fluid">
   {/* <a className="navbar-brand fw-bold fs-4" href="navbar">Telstronics</a> */}
   <div style={{display:'flex', flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
-  <img src={logo} alt="Logo" style={{height:'60px', width:'60px'}} />
+  <img src={logo} alt="Logo" style={{height:'60px', width:'70px'}} />
   <p style={{fontFamily:'Sora', fontWeight: '300px',color: '#676767'}}>Telstronics</p>
   </div>
   <form className="d-flex ms-1">
