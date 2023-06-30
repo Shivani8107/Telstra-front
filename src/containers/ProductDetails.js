@@ -36,7 +36,8 @@ const ProductDetails = () => {
     setProductID(productID)
     console.log(rating)
     console.log(review)
-    const data = { p_id, review, rating };
+    console.log(name)
+    const data = { p_id, name, review, rating };
     fetch('http://localhost:5000/review', {
       method: 'POST',
       headers: {
@@ -47,6 +48,7 @@ const ProductDetails = () => {
     .then(response => response.json(),
     data => console.log(data),
     setIsSubmitted(true),
+    console.log(data),
     setTimeout(() => {
       window.location.reload();
     }, 2000)
