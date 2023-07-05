@@ -79,7 +79,7 @@ const Signup = () => {
     const confirm_password = e.target[3].value
     const data = {email,username,password,confirm_password}
     console.log(data)
-    axios.post('http://localhost:5000/signup', data)
+    axios.post('', data)
     .then(response => {
       console.log(response)
       setStatus('Success')
